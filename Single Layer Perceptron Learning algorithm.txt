@@ -1,0 +1,53 @@
+# Single Layer Perceptron Implementation
+
+import numpy as np
+
+# Step function (activation function)
+def step_function(x):
+    return 1 if x >= 0 else 0
+
+
+# Training data (AND Gate example)
+X = np.array([
+    [0, 0],
+    [0, 1],
+    [1, 0],
+    [1, 1]
+])
+
+# Target output
+y = np.array([0, 0, 0, 1])
+
+# Initialize weights and bias
+weights = np.zeros(2)
+bias = 0
+
+# Learning rate
+eta = 0.1
+
+# Training
+epochs = 10
+
+for epoch in range(epochs):
+    print(f"\nEpoch {epoch + 1}")
+    for i in range(len(X)):
+        net_input = np.dot(X[i], weights) + bias
+        output = step_function(net_input)
+
+        # Update rule
+        error = y[i] - output
+        weights = weights + eta * error * X[i]
+        bias = bias + eta * error
+
+        print(f"Input: {X[i]}, Target: {y[i]}, Output: {output}, Error: {error}")
+
+print("\nFinal Weights:", weights)
+print("Final Bias:", bias)
+
+
+# Testing
+print("\nTesting Phase:")
+for i in range(len(X)):
+    net_input = np.dot(X[i], weights) + bias
+    output = step_function(net_input)
+    print(f"Input: {X[i]} -> Output: {output}")

@@ -1,0 +1,46 @@
+import numpy as np
+
+# AND Gate Data (Bipolar)
+X = np.array([
+    [-1, -1],
+    [-1,  1],
+    [ 1, -1],
+    [ 1,  1]
+])
+
+Y = np.array([-1, -1, -1, 1])
+
+# Initialize weights and bias
+w = np.zeros(2)
+b = 0
+
+print("=== AND Gate Training ===\n")
+
+# Training
+for i in range(len(X)):
+    x = X[i]
+    y = Y[i]
+
+    print(f"Input: {x}, Target: {y}")
+
+    # Hebbian Learning Rule
+    w = w + x * y
+    b = b + y
+
+    print("Updated Weights:", w)
+    print("Updated Bias:", b)
+    print("-" * 30)
+
+print("\nFinal Weights:", w)
+print("Final Bias:", b)
+
+# Activation function
+def activation(x):
+    return 1 if x >= 0 else -1
+
+# Testing
+print("\nTesting AND Gate:")
+for x in X:
+    y_in = np.dot(x, w) + b
+    y = activation(y_in)
+    print(f"Input: {x}, Output: {y}")

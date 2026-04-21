@@ -1,0 +1,33 @@
+#USE DATASET
+
+
+import numpy as np
+import pandas as pd
+from sklearn import linear_model
+from sklearn.model_selection import train_test_split
+
+df=pd.read_csv('/content/Student_Performance.csv')
+
+df
+
+n = df['Sleep Hours'].median()
+df['Sleep Hours'] = df['Sleep Hours'].fillna(n)
+df
+
+model = linear_model.LinearRegression()
+
+x = df[['Hours Studied', 'Sleep Hours', 'Previous Scores']]
+y = df['Performance Index']
+
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.1
+)
+
+model.fit(x_train, y_train)
+
+model.score(x_train, y_train)
+
+
+model.predict([[7, 8, 75]])
+
+model.score(x_train, y_train)

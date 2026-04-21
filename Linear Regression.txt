@@ -1,0 +1,27 @@
+# USE DATA SET FROM KEGGALE 
+
+import numpy as np
+
+import pandas as pd
+import seaborn as sns
+from sklearn import linear_model
+
+df
+
+sns.lineplot(x='x', y='y',data=df)
+
+modal=linear_model.LinearRegression()
+
+modal.fit(df[['x']],df.y)
+
+modal.score(df[['x']],df.y)
+
+modal.predict([[2020]])
+
+modal.coef_
+
+modal.intercept_
+
+y= 1.01433536*2020+(-0.461810773661187)
+
+y

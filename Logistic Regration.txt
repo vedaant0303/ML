@@ -1,0 +1,37 @@
+# USE DATSET 
+
+import numpy as np
+import pandas as pd
+from matplotlib import pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
+
+df=pd.read_csv('/content/healthcare_patient_journey.csv')
+
+df
+
+plt.scatter(df['age'], df['readmitted_30d'], marker='+', color='red')
+plt.xlabel("Age")
+plt.ylabel("readmitted 30d")
+
+
+X = df[['age']]
+y = df['readmitted_30d']
+x_train, x_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.4
+)
+
+
+len(x_train)
+len(x_test)
+
+model = LogisticRegression()
+model.fit(x_train, y_train)
+
+
+model.predict(x_test)
+
+model.predict_proba(x_test)
+
+model.score(x_test, y_test)
