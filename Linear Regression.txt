@@ -1,27 +1,31 @@
-# USE DATA SET FROM KEGGALE 
-
-import numpy as np
-
+*Linear regression*
+from google.colab import files
+uploaded = files.upload()
 import pandas as pd
-import seaborn as sns
-from sklearn import linear_model
+df = pd.read_csv('Salary_Data.csv')
+df.shape
+df.info()
+df.head()
+import matplotlib.pyplot as plt
 
-df
-
-sns.lineplot(x='x', y='y',data=df)
-
-modal=linear_model.LinearRegression()
-
-modal.fit(df[['x']],df.y)
-
-modal.score(df[['x']],df.y)
-
-modal.predict([[2020]])
-
-modal.coef_
-
-modal.intercept_
-
-y= 1.01433536*2020+(-0.461810773661187)
-
-y
+plt.scatter(df['YearsExperience'], df['Salary'])
+plt.xlabel("Years of Experience")
+plt.ylabel("Salary")
+plt.title("Experience vs Salary")
+plt.show()
+X = df['YearsExperience']
+y = df['Salary']
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+X_np = X.values
+X1 = X_np.reshape(30,1)
+model.fit(X1, y)
+predicted_salary = model.predict(X1)
+print(predicted_salary)
+model.predict([[5]])
+plt.scatter(X1, y)
+plt.plot(X1, predicted_salary, color='red')
+plt.xlabel("Years of Experience")
+plt.ylabel("Salary")
+plt.title("Linear Regression Model")
+plt.show()
